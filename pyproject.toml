@@ -19,9 +19,10 @@ dev = [
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+force-exclude = true
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "B", "UP"]
+select = ["E", "F", "I", "B", "UP", "T201"]
 ignore = []
 
 [tool.ruff.format]
