@@ -1,0 +1,120 @@
+version: '3'
+
+tasks:
+  default:
+    desc: Muestra las tareas disponibles
+    cmds:
+      - task --list
+
+  install:
+    desc: Instala el setup base del proyecto
+    cmds:
+      - ./scripts/install/install-all.sh
+
+  install:python:
+    desc: Instala tooling Python y sincroniza entorno
+    cmds:
+      - ./scripts/install/install-python-tooling.sh
+
+  install:precommit:
+    desc: Instala hooks de pre-commit
+    cmds:
+      - ./scripts/install/install-pre-commit.sh
+
+  install:serverless:
+    desc: Instala Serverless Framework y plugins del proyecto
+    cmds:
+      - ./scripts/install/install-serverless.sh
+
+  lint:
+    desc: Ejecuta lint del proyecto
+    cmds:
+      - ./scripts/checks/lint.sh
+
+  format:
+    desc: Aplica formato y fixes automáticos
+    cmds:
+      - ./scripts/checks/format.sh
+
+  test:
+    desc: Ejecuta tests
+    cmds:
+      - ./scripts/checks/test.sh
+
+  check:
+    desc: Ejecuta lint y tests
+    cmds:
+      - ./scripts/checks/check-all.sh
+
+  precommit:
+    desc: Ejecuta todos los hooks de pre-commit manualmente
+    cmds:
+      - uv run pre-commit run --all-files
+
+  secrets:init:
+    desc: Crea el baseline inicial de detect-secrets
+    cmds:
+      - uv run detect-secrets scan > .secrets.baseline
+
+  secrets:audit:
+    desc: Audita el baseline de secretos
+    cmds:
+      - uv run detect-secrets audit .secrets.baseline
+
+  secrets:update:
+    desc: Actualiza el baseline de secretos
+    cmds:
+      - uv run detect-secrets scan --update .secrets.baseline
+
+  docker:login:
+    desc: Hace login al registry configurado
+    cmds:
+      - ./scripts/docker/login-registry.sh
+
+  docker:build:
+    desc: Construye la imagen Docker
+    cmds:
+      - ./scripts/docker/build-image.sh
+
+  docker:push:
+    desc: Empuja la imagen Docker al registry
+    cmds:
+      - ./scripts/docker/push-image.sh
+
+  docker:publish:
+    desc: Login + build + push
+    cmds:
+      - task docker:login
+      - task docker:build
+      - task docker:push
+
+  sls:print:
+    desc: Resuelve e imprime serverless.yml para dev/us-east-1
+    cmds:
+      - npx serverless print --stage dev --region us-east-1
+
+  sls:package:
+    desc: Empaqueta Serverless para dev
+    cmds:
+      - npx serverless package --stage dev
+
+  sls:yamllint:
+    desc: Valida serverless.yml con yamllint
+    cmds:
+      - yamllint serverless.yml
+
+  sls:invoke-local:
+    desc: Invoca localmente una función con event.json
+    cmds:
+      - npx serverless invoke local -f {{.FUNCTION}} --path {{.EVENT_FILE}}
+
+    vars:
+      FUNCTION: '{{.FUNCTION | default "miFuncion"}}'
+      EVENT_FILE: '{{.EVENT_FILE | default "event.json"}}'
+
+  sls:validate:
+    desc: Validación completa previa al deploy
+    cmds:
+      - task sls:yamllint
+      - task sls:print
+      - task sls:package
