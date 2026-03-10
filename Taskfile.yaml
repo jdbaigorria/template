@@ -9,22 +9,22 @@ tasks:
   install:
     desc: Instala el setup base del proyecto
     cmds:
-      - ./scripts/install/install-all.sh
+      - ./scripts/install/install.sh
 
   install:python:
     desc: Instala tooling Python y sincroniza entorno
     cmds:
-      - ./scripts/install/install-python-tooling.sh
+      - ./scripts/install/python-tooling.sh
 
   install:precommit:
     desc: Instala hooks de pre-commit
     cmds:
-      - ./scripts/install/install-pre-commit.sh
+      - ./scripts/install/pre-commit.sh
 
   install:serverless:
     desc: Instala Serverless Framework y plugins del proyecto
     cmds:
-      - ./scripts/install/install-serverless.sh
+      - ./scripts/install/sls.sh
 
   lint:
     desc: Ejecuta lint del proyecto
@@ -44,7 +44,7 @@ tasks:
   check:
     desc: Ejecuta lint y tests
     cmds:
-      - ./scripts/checks/check-all.sh
+      - ./scripts/checks/check.sh
 
   precommit:
     desc: Ejecuta todos los hooks de pre-commit manualmente
@@ -69,17 +69,17 @@ tasks:
   docker:login:
     desc: Hace login al registry configurado
     cmds:
-      - ./scripts/docker/login-registry.sh
+      - ./scripts/docker/login.sh
 
   docker:build:
     desc: Construye la imagen Docker
     cmds:
-      - ./scripts/docker/build-image.sh
+      - ./scripts/docker/build.sh
 
   docker:push:
     desc: Empuja la imagen Docker al registry
     cmds:
-      - ./scripts/docker/push-image.sh
+      - ./scripts/docker/push.sh
 
   docker:publish:
     desc: Login + build + push
