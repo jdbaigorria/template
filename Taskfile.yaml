@@ -14,7 +14,7 @@ tasks:
   install:python:
     desc: Instala tooling Python y sincroniza entorno
     cmds:
-      - ./scripts/install/python-tooling.sh
+      - ./scripts/install/python.sh
 
   install:precommit:
     desc: Instala hooks de pre-commit
