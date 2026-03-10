@@ -22,7 +22,7 @@ if [[ ! -f pyproject.toml ]]; then
   exit 1
 fi
 
-echo "Sincronizando entorno Python con uv..."
+echo "Sincronizando entorno Python con uv (incluyendo dev)..."
 uv sync --all-groups
 
 echo "Entorno Python listo."
