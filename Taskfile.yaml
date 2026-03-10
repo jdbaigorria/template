@@ -101,16 +101,15 @@ tasks:
   sls:yamllint:
     desc: Valida serverless.yml con yamllint
     cmds:
-      - yamllint serverless.yml
+      - uv run yamllint serverless.yml
 
   sls:invoke-local:
-    desc: Invoca localmente una función con event.json
-    cmds:
-      - npx serverless invoke local -f {{.FUNCTION}} --path {{.EVENT_FILE}}
-
+    desc: Invoca localmente una función con un evento
     vars:
       FUNCTION: '{{.FUNCTION | default "miFuncion"}}'
       EVENT_FILE: '{{.EVENT_FILE | default "event.json"}}'
+    cmds:
+      - npx serverless invoke local -f {{.FUNCTION}} --path {{.EVENT_FILE}}
 
   sls:validate:
     desc: Validación completa previa al deploy
@@ -118,3 +117,8 @@ tasks:
       - task sls:yamllint
       - task sls:print
       - task sls:package
+
+  sls:check:
+    desc: Alias corto para validación previa al deploy
+    cmds:
+      - task sls:validate
