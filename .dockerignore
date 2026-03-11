@@ -1,0 +1,53 @@
+# Git y versionado
+.git
+.gitignore
+
+# Entorno local y direnv
+.env
+.env.*
+.envrc
+.venv
+venv
+
+# Python / herramientas
+.python-version
+__pycache__
+*.py[cod]
+*.pyo
+*.pyd
+.mypy_cache
+.ruff_cache
+.pytest_cache
+*.egg-info
+.eggs
+dist
+build
+
+# Tests y cobertura
+tests
+*_test.py
+test_*.py
+.coverage
+htmlcov
+.pytest_cache
+
+# Documentación y scripts de desarrollo
+README.md
+scripts
+*.md
+docs
+
+# IDE y editor
+.cursor
+.idea
+.vscode
+*.swp
+*.swo
+
+# Docker (no copiar el propio build)
+Dockerfile*
+.dockerignore
+
+# Otros
+*.log
+.DS_Store

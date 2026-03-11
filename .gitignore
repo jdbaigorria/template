@@ -14,3 +14,5 @@ package-lock.json
 .env
 .env.local
 .serverless
+.ruff_cache
+.pytest_cache
