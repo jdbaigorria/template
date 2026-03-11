@@ -1,0 +1,37 @@
+---
+description: Formato de mensajes de commit (conventional commits)
+alwaysApply: true
+---
+
+# Mensajes de commit
+
+Siempre usar **Conventional Commits** en una sola línea.
+
+## Formato
+
+```
+<tipo>: <descripción breve>
+```
+
+## Tipos habituales
+
+- `feat:` nueva funcionalidad
+- `fix:` corrección de bug
+- `chore:` tareas de mantenimiento, deps, config, scripts
+- `docs:` solo documentación
+- `style:` formato, espacios, no cambio de código
+- `refactor:` refactor sin cambiar comportamiento
+- `test:` añadir o cambiar tests
+- `ci:` cambios en CI/CD
+
+## Ejemplos
+
+- `chore: add pre-commit with ruff and commitizen`
+- `feat: add package.json and node tooling`
+- `fix: ensure PATH is exported in .envrc`
+
+## Qué NO hacer
+
+- No usar varias líneas ni listas con guiones.
+- No empezar con mayúscula después de los dos puntos (opcional en spec, pero mantener consistente).
+- No usar mensajes genéricos como "Update files" o "Enhance project configuration".
