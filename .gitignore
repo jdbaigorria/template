@@ -11,3 +11,6 @@ wheels/
 .secrets.baseline
 node_modules
 package-lock.json
+.env
+.env.local
+.serverless
